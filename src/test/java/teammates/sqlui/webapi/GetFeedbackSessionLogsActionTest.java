@@ -281,19 +281,11 @@ public class GetFeedbackSessionLogsActionTest extends BaseActionTest<GetFeedback
 
     @Test
     void testSpecificAccessControl_instructorWithInvalidPermission_cannotAccess() {
-
-        Instructor instructor = new Instructor(course, "name", "instructoremail@tm.tmt",
-                false, "", null, new InstructorPrivileges());
-
-        loginAsInstructor(googleId);
-        when(mockLogic.getCourse(course.getId())).thenReturn(course);
-        when(mockLogic.getInstructorByGoogleId(course.getId(), googleId)).thenReturn(instructor);
-
         String[] params = {
                 Const.ParamsNames.COURSE_ID, course.getId(),
         };
 
-        verifyCannotAccess(params);
+        verifyInaccessibleWithoutCorrectSameCoursePrivilege(course,new InstructorPrivileges(), params);
     }
 
     @Test
@@ -321,10 +313,9 @@ public class GetFeedbackSessionLogsActionTest extends BaseActionTest<GetFeedback
         String[] params = {
                 Const.ParamsNames.COURSE_ID, course.getId(),
         };
-        loginAsStudent(googleId);
-        verifyCannotAccess(params);
 
-        logoutUser();
-        verifyCannotAccess(params);
+        verifyStudentsCannotAccess(params);
+        verifyUnregisteredCannotAccess(params);
+        verifyWithoutLoginCannotAccess(params);
     }
 }

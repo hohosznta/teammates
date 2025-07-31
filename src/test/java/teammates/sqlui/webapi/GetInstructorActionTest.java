@@ -201,28 +201,13 @@ public class GetInstructorActionTest extends BaseActionTest<GetInstructorAction>
     }
 
     @Test
-    void testSpecificAccessControl_loggedInAsInstuctorFullDetail_canAccess() {
-        Instructor instructor = new Instructor(course, "name", "email@tm.tmt", false, "", null, null);
-        when(mockLogic.getInstructorByGoogleId(course.getId(), "user-id")).thenReturn(instructor);
+    void testSpecificAccessControl_onlyLoggedInAsFullDetail_canAccess() {
         String[] params = {
                 Const.ParamsNames.COURSE_ID, "different-course",
                 Const.ParamsNames.INTENT, Intent.FULL_DETAIL.toString(),
         };
 
-        verifyCanAccess(params);
-    }
-
-    @Test
-    void testSpecificAccessControl_notLoggedInFullDetail_cannotAccess() {
-        logoutUser();
-        Instructor instructor = new Instructor(course, "name", "email@tm.tmt", false, "", null, null);
-        when(mockLogic.getInstructorByGoogleId(course.getId(), "user-id")).thenReturn(instructor);
-        String[] params = {
-                Const.ParamsNames.COURSE_ID, "different-course",
-                Const.ParamsNames.INTENT, Intent.FULL_DETAIL.toString(),
-        };
-
-        verifyCannotAccess(params);
+        verifyOnlyLoggedInUsersCanAccess(params);
     }
 
 }
