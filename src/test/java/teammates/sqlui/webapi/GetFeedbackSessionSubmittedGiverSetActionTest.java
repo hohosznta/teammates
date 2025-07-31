@@ -14,7 +14,6 @@ import teammates.storage.sqlentity.Course;
 import teammates.storage.sqlentity.FeedbackQuestion;
 import teammates.storage.sqlentity.FeedbackResponse;
 import teammates.storage.sqlentity.FeedbackSession;
-import teammates.storage.sqlentity.Instructor;
 import teammates.ui.output.FeedbackSessionSubmittedGiverSet;
 import teammates.ui.webapi.GetFeedbackSessionSubmittedGiverSetAction;
 import teammates.ui.webapi.JsonResult;
@@ -25,7 +24,6 @@ import teammates.ui.webapi.JsonResult;
 public class GetFeedbackSessionSubmittedGiverSetActionTest
         extends BaseActionTest<GetFeedbackSessionSubmittedGiverSetAction> {
 
-    private Instructor typicalInstructor;
     private Course typicalCourse;
     private FeedbackSession typicalFeedbackSession;
     private FeedbackResponse typicalFeedbackResponse;
@@ -42,7 +40,6 @@ public class GetFeedbackSessionSubmittedGiverSetActionTest
 
     @BeforeMethod
     void setUp() {
-        typicalInstructor = getTypicalInstructor();
         typicalCourse = getTypicalCourse();
         typicalFeedbackSession = getTypicalFeedbackSessionForCourse(typicalCourse);
         FeedbackQuestion typicalFeedbackQuestion = getTypicalFeedbackQuestionForSession(typicalFeedbackSession);

@@ -285,7 +285,7 @@ public class GetFeedbackSessionLogsActionTest extends BaseActionTest<GetFeedback
                 Const.ParamsNames.COURSE_ID, course.getId(),
         };
 
-        verifyInaccessibleWithoutCorrectSameCoursePrivilege(course,new InstructorPrivileges(), params);
+        verifyInaccessibleWithoutCorrectSameCoursePrivilege(course, new InstructorPrivileges(), params);
     }
 
     @Test
